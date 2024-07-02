@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace DevLink
 {
@@ -36,6 +37,9 @@ namespace DevLink
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseSerilogRequestLogging();
+
             app.UseStaticFiles();
 
             app.UseRouting();
