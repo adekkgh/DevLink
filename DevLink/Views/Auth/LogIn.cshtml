@@ -1,0 +1,75 @@
+﻿@model UserViewModel
+
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("_AuthLayout")
+
+<div class="login-container">
+    <div class="login">
+        <h2 class="login__title">DevLink</h2>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="login__error">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(value => value.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="login__subtitile">Пожалуйста войдите в свой аккаунт</p>
+        }
+
+        <form action="/Auth/LogIntoAccount" method="post" class="login__form">
+            <div asp-validation-summary="None"></div>
+
+            <div class="login__form__group">
+                <input asp-for="Email" type="email" class="login__form__group-input" placeholder="Email" />
+                <span asp-validation-for="Email" class="login__form__group-warning"></span>
+            </div>
+
+            <div class="login__form__group">
+                <input asp-for="Password" type="password" id="passwordInput" class="login__form__group-password" placeholder="Пароль" />
+                <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility()">
+                    <i id="eyeIcon" class="fa fa-eye" style="color: lightgray;"></i>
+                </button>
+                <span asp-validation-for="Password" class="login__form__group-warning"></span>
+            </div>
+
+            <div class="login__form__remember">
+                <input class="login__form__remember-input" type="checkbox" name="remember" id="remember" />
+                <label class="login__form__remember-label" for="remember">Не выходить неделю</label>
+            </div>
+
+            <button type="submit" class="login__form__button">ВОЙТИ</button>
+        </form>
+
+        <div class="login__new-account">
+            <p>Еще нет аккаунта?</p>
+            <a class="btn" asp-controller="Auth" asp-action="LogIn">Создайте!</a>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("passwordInput");
+        var eyeIcon = document.getElementById("eyeIcon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        }
+        else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        }
+    }
+</script>
