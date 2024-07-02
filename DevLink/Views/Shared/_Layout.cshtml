@@ -3,43 +3,69 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DevLink</title>
+    <title>DevLink</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version=true />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DevLink</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="d-flex" style="align-items: stretch; height: 100vh;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white" style="width: 280px; background: #6f2232">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" style="font-size: 24px">
+                DevLink
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/images/sidebar/home-icon.png" alt="" width="24" height="24" class="me-2">
+                        <span class="ml-2">Главная</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/images/sidebar/chats-icon.png" alt="" width="24" height="24" class="me-2">
+                        <span class="ml-2">Сообщения</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/images/sidebar/friends-icon.png" alt="" width="24" height="24" class="me-2">
+                        <span class="ml-2">Друзья</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Privacy" target="_blank">
+                        <img src="~/images/sidebar/privacy-policy-icon.png" alt="" width="24" height="24" class="me-2">
+                        <span class="ml-2">Правила пользования</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Auth" asp-action="LogOut">
+                        <img src="~/images/sidebar/logout-icon.png" alt="" width="24" height="24" class="me-2">
+                        <span class="ml-2">Выход</span>
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none" aria-expanded="false">
+                    <img src="~/images/sidebar/profile-icon.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+                    @await Component.InvokeAsync("User")
+                </a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
+        <div class="main-container flex-grow-1">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - DevLink - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

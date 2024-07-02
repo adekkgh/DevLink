@@ -20,11 +20,21 @@ namespace DevLink.Controllers
 
         public IActionResult Index()
         {
+            if (Request.Cookies["user"] == null)
+            {
+                return RedirectToAction("LogIn", "Auth");
+            }
+
             return View();
         }
 
         public IActionResult Privacy()
         {
+            if (Request.Cookies["user"] == null)
+            {
+                return RedirectToAction("LogIn", "Auth");
+            }
+
             return View();
         }
 
