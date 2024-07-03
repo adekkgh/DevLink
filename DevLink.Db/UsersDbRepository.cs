@@ -72,6 +72,10 @@ namespace DevLink.Db
             databaseContext.Users.FirstOrDefault(u => u.Id == user.Id).Password = newPasword;
             databaseContext.SaveChanges();
         }
+        public List<User> GetFriends(Guid id)
+        {
+            return databaseContext.Users.FirstOrDefault(u => u.Id == id).Friends;
+		}
     }
 
     public interface IUsersRepository
@@ -85,5 +89,7 @@ namespace DevLink.Db
         public bool IsPasswordValid(string email, string password);
         public void ChangeEmail(User user, string newEmail);
         public void ChangePassword(User user, string newPasword);
-    }
+        public List<User> GetFriends(Guid id);
+
+	}
 }
