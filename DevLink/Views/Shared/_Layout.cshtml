@@ -9,37 +9,37 @@
 </head>
 <body>
     <div class="d-flex" style="align-items: stretch; height: 100vh;">
-        <div class="position-fixed d-flex flex-column flex-shrink-0 p-3 text-white" style="width: 280px; background: #6f2232; height: 100vh;">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" style="font-size: 24px">
+        <div class="position-fixed d-flex flex-column flex-shrink-0 text-white" style="width: 280px; background: #6f2232; height: 100vh;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none p-3" style="font-size: 24px">
                 DevLink
             </a>
             <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
+            <ul class="nav nav-pills flex-column mb-auto" id="navBar" style="width: 100%;">
                 <li class="nav-item">
                     <a class="nav-link text-white d-flex align-items-center" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">
                         <img src="~/images/sidebar/home-icon.png" alt="" width="24" height="24" class="me-2">
                         <span class="ml-2">Главная</span>
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
                         <img src="~/images/sidebar/chats-icon.png" alt="" width="24" height="24" class="me-2">
                         <span class="ml-2">Сообщения</span>
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Friends" asp-action="Index">
                         <img src="~/images/sidebar/friends-icon.png" alt="" width="24" height="24" class="me-2">
                         <span class="ml-2">Друзья</span>
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Privacy" target="_blank">
                         <img src="~/images/sidebar/privacy-policy-icon.png" alt="" width="24" height="24" class="me-2">
                         <span class="ml-2">Правила пользования</span>
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Auth" asp-action="LogOut">
                         <img src="~/images/sidebar/logout-icon.png" alt="" width="24" height="24" class="me-2">
                         <span class="ml-2">Выход</span>
@@ -47,7 +47,7 @@
                 </li>
             </ul>
             <hr>
-            <div class="dropdown">
+            <div class="dropdown p-3">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none" aria-expanded="false">
                     <img src="~/images/sidebar/profile-icon.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
                     @await Component.InvokeAsync("User")
@@ -61,14 +61,38 @@
         </div>
     </div>
 
-    @* <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - DevLink - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
+
+<script>
+
+    let currentURL = window.location.pathname;
+    let navBars = document.querySelectorAll('.nav-item');
+    let topRounding = document.createElement('span');
+    let bottomRounding = document.createElement('span');
+
+    topRounding.classList.add('nav-item-top-rounding');
+    bottomRounding.classList.add('nav-item-bottom-rounding');
+
+    if (currentURL.includes('Home')) {
+        navBars[0].classList.add('active-nav-bar');
+        navBars[0].append(topRounding);
+        navBars[0].append(bottomRounding);
+    }
+    else if (currentURL.includes('Chats')) {
+        navBars[1].classList.add('active-nav-bar');
+        navBars[1].append(topRounding);
+        navBars[1].append(bottomRounding);
+    }
+    else if (currentURL.includes('Friends')) {
+        navBars[2].classList.add('active-nav-bar');
+        navBars[2].append(topRounding);
+        navBars[2].append(bottomRounding);
+    }
+
+</script>
