@@ -4,47 +4,22 @@ using DevLink.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DevLink.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240703142534_NewUsersToTable")]
+    partial class NewUsersToTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DevLink.Db.Models.Friendship", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("FriendId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "FriendId");
-
-                    b.HasIndex("FriendId");
-
-                    b.ToTable("Friendships");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("00000000-aaaa-aaaa-aaaa-000000000000"),
-                            FriendId = new Guid("00000000-aaaa-aaaa-aaaa-555555555555")
-                        },
-                        new
-                        {
-                            UserId = new Guid("00000000-aaaa-aaaa-aaaa-000000000000"),
-                            FriendId = new Guid("00000000-aaaa-aaaa-aaaa-666666666666")
-                        });
-                });
 
             modelBuilder.Entity("DevLink.Db.Models.User", b =>
                 {
@@ -76,10 +51,15 @@ namespace DevLink.Db.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Users");
 
@@ -96,45 +76,6 @@ namespace DevLink.Db.Migrations
                             Phone = "",
                             Role = "admin",
                             UserName = "admin"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-aaaa-aaaa-aaaa-555555555555"),
-                            City = "Владикавказ",
-                            Email = "",
-                            FirstName = "Друг",
-                            Gender = "Мужской",
-                            LastName = "1",
-                            Password = "1234",
-                            Phone = "",
-                            Role = "user",
-                            UserName = "friend1"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-aaaa-aaaa-aaaa-666666666666"),
-                            City = "Владикавказ",
-                            Email = "",
-                            FirstName = "Друг",
-                            Gender = "Мужской",
-                            LastName = "2",
-                            Password = "1234",
-                            Phone = "",
-                            Role = "user",
-                            UserName = "friend2"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-aaaa-aaaa-aaaa-777777777777"),
-                            City = "Владикавказ",
-                            Email = "",
-                            FirstName = "Друг",
-                            Gender = "Мужской",
-                            LastName = "3",
-                            Password = "1234",
-                            Phone = "",
-                            Role = "user",
-                            UserName = "friend3"
                         },
                         new
                         {
@@ -190,28 +131,16 @@ namespace DevLink.Db.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DevLink.Db.Models.Friendship", b =>
+            modelBuilder.Entity("DevLink.Db.Models.User", b =>
                 {
-                    b.HasOne("DevLink.Db.Models.User", "Friend")
-                        .WithMany()
-                        .HasForeignKey("FriendId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DevLink.Db.Models.User", "User")
-                        .WithMany("Friendships")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Friend");
-
-                    b.Navigation("User");
+                    b.HasOne("DevLink.Db.Models.User", null)
+                        .WithMany("Friends")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("DevLink.Db.Models.User", b =>
                 {
-                    b.Navigation("Friendships");
+                    b.Navigation("Friends");
                 });
 #pragma warning restore 612, 618
         }

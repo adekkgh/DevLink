@@ -72,10 +72,25 @@ namespace DevLink.Db
             databaseContext.Users.FirstOrDefault(u => u.Id == user.Id).Password = newPasword;
             databaseContext.SaveChanges();
         }
+
         public List<User> GetFriends(Guid id)
         {
-            return databaseContext.Users.FirstOrDefault(u => u.Id == id).Friends;
-		}
+            return databaseContext.Friendships.Where(f => f.UserId == id).Select(f => f.Friend).ToList();
+        }
+        public List<User> GetPossibleFriends(Guid id)
+        {
+            var friends = databaseContext.Friendships.Where(f => f.UserId == id).Select(f => f.Friend).ToList();
+            var possibleFriends = new List<User>();
+            foreach(var user in databaseContext.Users)
+            {
+                if (!friends.Contains(user) && user.Role != "admin")
+                {
+                    possibleFriends.Add(user);
+                }
+            }
+
+            return possibleFriends;
+        }
     }
 
     public interface IUsersRepository
@@ -90,6 +105,7 @@ namespace DevLink.Db
         public void ChangeEmail(User user, string newEmail);
         public void ChangePassword(User user, string newPasword);
         public List<User> GetFriends(Guid id);
+        public List<User> GetPossibleFriends(Guid id);
 
-	}
+    }
 }

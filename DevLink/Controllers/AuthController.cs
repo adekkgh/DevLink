@@ -18,7 +18,7 @@ namespace DevLink.Controllers
 
         public IActionResult Login()
         {
-            if (Request.Cookies["user"] != null)
+            if (Request.Cookies["userGuid"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -38,7 +38,7 @@ namespace DevLink.Controllers
 
         public IActionResult SignUp()
         {
-            if (Request.Cookies["user"] != null)
+            if (Request.Cookies["userGuid"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -48,7 +48,7 @@ namespace DevLink.Controllers
 
         public IActionResult LogIntoAccount(string email, string password, bool remember)
         {
-            if (Request.Cookies["user"] != null)
+            if (Request.Cookies["userGuid"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -77,14 +77,14 @@ namespace DevLink.Controllers
                 option.Expires = DateTime.Now.AddDays(1);
             }
 
-            Response.Cookies.Append("user", user.Id.ToString(), option);
+            Response.Cookies.Append("userGuid", user.Id.ToString(), option);
             Response.Cookies.Append("role", user.Role, option);
             return RedirectToAction("Index", "Home");
         }
 
         public IActionResult CreateNewAccount(UserViewModel createdUser)
         {
-            if (Request.Cookies["user"] != null)
+            if (Request.Cookies["userGuid"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -132,7 +132,7 @@ namespace DevLink.Controllers
 
                 CookieOptions option = new CookieOptions();
                 option.Expires = DateTime.Now.AddDays(1);
-                Response.Cookies.Append("user", newUser.Id.ToString(), option);
+                Response.Cookies.Append("userGuid", newUser.Id.ToString(), option);
                 Response.Cookies.Append("role", newUser.Role, option);
 
                 return RedirectToAction("Index", "Home");

@@ -1,0 +1,34 @@
+﻿@model List<UserViewModel>
+
+
+
+<div class="text-center">
+    <h1 class="display-4 friends__title">Ваши друзья</h1>
+
+    @if (Model.Count == 0)
+    {
+        <h2 class="friends__subtitle">В настоящее время список друзей пуст</h2>
+    }
+    else
+    {
+        <div class="friends__list">
+            @foreach (var user in Model)
+            {
+                <div class="friends__list__card">
+                    <div class="friends__list__card-image-container">
+                        <img src="~/images/sidebar/profile-icon.jpg" class="friends__list__card-image" />
+                    </div>
+                    <div class="friends__list__card__details">
+                        <div class="friends__list__card__details-name">
+                            <h4>@user.FirstName @user.LastName</h4>
+                            <span> •   @user.UserName</span>
+                        </div>
+                        <p class="friends__list__card__details-email">@user.Email</p>
+                        <p class="friends__list__card__details-info">@user.City</p>
+                    </div>
+                    <a class="btn friends__list__card__details-button" asp-controller="Friends" asp-action="Index">Удалить</a>
+                </div>
+            }
+        </div>
+    }
+</div>
