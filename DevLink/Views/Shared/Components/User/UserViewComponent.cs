@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace Ironau_Dzuris.Views.Shared.Components.User
+namespace DevLink.Views.Shared.Components.User
 {
     public class UserViewComponent : ViewComponent
     {

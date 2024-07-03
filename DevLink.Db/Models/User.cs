@@ -16,5 +16,10 @@ namespace DevLink.Db.Models
         public string Gender { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
+        public List<User> Friends { get; set; }
+        public User()
+        {
+            Friends = new List<User>();
+        }
     }
 }
