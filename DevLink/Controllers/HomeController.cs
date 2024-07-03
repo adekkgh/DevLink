@@ -24,33 +24,25 @@ namespace DevLink.Controllers
 
         public IActionResult Index()
         {
-            if (Request.Cookies["user"] == null)
+            if (Request.Cookies["userGuid"] == null)
             {
                 return RedirectToAction("LogIn", "Auth");
             }
 
-            return View();
+            var users = Mapping.ToUsersViewModel(_usersRepository.GetPossibleFriends(Guid.Parse(Request.Cookies["userGuid"])));
+            return View(users);
         }
 
         public IActionResult Privacy()
         {
-            if (Request.Cookies["user"] == null)
+            if (Request.Cookies["userGuid"] == null)
             {
                 return RedirectToAction("LogIn", "Auth");
             }
 
             return View();
         }
-        public IActionResult Friends()
-        {
-			if (Request.Cookies["user"] == null)
-			{
-				return RedirectToAction("LogIn", "Auth");
-			}
-            var friends = _usersRepository.GetFriends(Guid.Parse(Request.Cookies["user"]));     //берет список друзей для пользователя, которого берет из кук
-            var friendsView = Mapping.ToUsersViewModel(friends);
-			return View(friendsView);
-		}
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

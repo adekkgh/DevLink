@@ -19,7 +19,7 @@ namespace DevLink.Views.Shared.Components.User
 
         public IViewComponentResult Invoke()
         {
-            var id = httpContextAccessor.HttpContext.Request.Cookies["user"];
+            var id = httpContextAccessor.HttpContext.Request.Cookies["userGuid"];
             if (id == null)
             {
                 return View("User", "");
