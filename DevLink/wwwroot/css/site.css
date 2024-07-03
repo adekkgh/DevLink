@@ -93,6 +93,72 @@ body {
     margin: 0 50px 0 330px;
 }
 
+.nav-item {
+    position: relative;
+}
+
+.nav-item:hover {
+    background: var(--dark-pink);
+    z-index: 10;
+}
+
+.active-nav-bar {
+    background: var(--dark-gray);
+}
+
+.nav-item:hover .nav-item-top-rounding,
+.nav-item:hover .nav-item-bottom-rounding {
+    border-radius: unset;
+}
+
+.active-nav-bar::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: var(--dark-gray);
+    position: absolute;
+    top: -20px;
+    right: 0;
+}
+
+.active-nav-bar::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: var(--dark-gray);
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+}
+
+.nav-item-top-rounding {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: var(--maroon);
+    position: absolute;
+    top: -20px;
+    right: 0;
+    border-bottom-right-radius: 80%;
+    z-index: 1;
+}
+
+.nav-item-bottom-rounding {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: var(--maroon);
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    border-top-right-radius: 80%;
+    z-index: 10;
+}
+
 
 /***********************   HomePage   *************************/
 
