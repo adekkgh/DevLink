@@ -36,6 +36,11 @@ namespace DevLink.Db
             return databaseContext.Users.FirstOrDefault(u => u.Id == id);
         }
 
+        public User FindByUsername(string username)
+        {
+            return databaseContext.Users.FirstOrDefault(u => u.UserName == username);
+        }
+
         public bool IsEmailValid(string email)
         {
             var user = databaseContext.Users.FirstOrDefault(u => u.Email == email);
@@ -75,6 +80,7 @@ namespace DevLink.Db
         public void Add(User user);
         public User FindByEmail(string email);
         public User FindById(Guid id);
+        public User FindByUsername(string username);
         public bool IsEmailValid(string email);
         public bool IsPasswordValid(string email, string password);
         public void ChangeEmail(User user, string newEmail);

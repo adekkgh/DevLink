@@ -1,0 +1,149 @@
+﻿@model UserViewModel
+
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("_AuthLayout")
+
+
+<div class="sign-up-container">
+    <div class="sign-up">
+        <h2 class="sign-up__title">Регистрация DevLink</h2>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="sign-up__error">
+                @{
+                    var errors = ViewData.ModelState.Values.SelectMany(value => value.Errors).ToList();
+                }
+                @foreach (var error in errors.Take(errors.Count - 1))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="sign-up__subtitle">Пожалуйста, заполните все поля</p>
+        }
+
+        <form action="/Auth/CreateNewAccount" method="post" class="sign-up__form">
+            <div asp-validation-summary="None" class="validation"></div>
+
+            <div class="sign-up__form__group">
+                <label class="sign-up__form__group-label">Имя</label>
+                <input asp-for="FirstName" type="text" class="sign-up__form__group-input" placeholder="Введите ваше имя" />
+                <span asp-validation-for="FirstName" class="sign-up__form__group-warning"></span>
+            </div>
+
+            <div class="sign-up__form__group">
+                <label class="sign-up__form__group-label">Фамилия</label>
+                <input asp-for="LastName" type="text" class="sign-up__form__group-input" placeholder="Введите вашу фамилию" />
+                <span asp-validation-for="LastName" class="sign-up__form__group-warning"></span>
+            </div>
+
+            <div class="sign-up__form__group">
+                <label class="sign-up__form__group-label">Никнейм</label>
+                <input asp-for="UserName" type="text" class="sign-up__form__group-input" placeholder="Введите ваш никнейм" />
+                <span asp-validation-for="UserName" class="sign-up__form__group-warning"></span>
+            </div>
+
+            <div class="sign-up__form__group">
+                <label class="sign-up__form__group-label">Email</label>
+                <input asp-for="Email" type="email" class="sign-up__form__group-input" placeholder="Введите ваш email" />
+                <span asp-validation-for="Email" class="sign-up__form__group-warning"></span>
+            </div>
+
+            <div class="sign-up__form__group">
+                <label class="sign-up__form__group-label">Номер телефона</label>
+                <input asp-for="Phone" type="tel" class="sign-up__form__group-input" placeholder="Введите ваш телефон" />
+                <span asp-validation-for="Phone" class="sign-up__form__group-warning"></span>
+            </div>
+
+            <div class="sign-up__form__group">
+                <label class="sign-up__form__group-label">Город</label>
+                <select asp-for="City" class="sign-up__form__group-select" id="citySelect">
+                    <option>Не указан</option>
+                    <option>Москва</option>
+                    <option>Санкт-Петербург</option>
+                    <option>Владикавказ</option>
+                    <option>Махачкала</option>
+                </select>
+            </div>
+
+            <div class="sign-up__form__group">
+                <label class="sign-up__form__group-label">Пол</label>
+                <select asp-for="Gender" class="sign-up__form__group-select">
+                    <option>Мужской</option>
+                    <option>Женский</option>
+                </select>
+            </div>
+
+            <div class="sign-up__form__group">
+                <label class="sign-up__form__group-label">Пароль</label>
+                <input asp-for="NewPassword" type="password" id="passwordInput" class="sign-up__form__group-password" placeholder="Придумайте пароль" />
+                <button type="button" class="sign-up__password-toggle-btn" onclick="togglePasswordVisibility()">
+                    <i id="eyeIcon" class="fa fa-eye" style="color: lightgray;"></i>
+                </button>
+                <span asp-validation-for="NewPassword" class="sign-up__form__group-warning"></span>
+            </div>
+
+            <div class="sign-up__form__group">
+                <label class="sign-up__form__group-label">Повтор пароля</label>
+                <input asp-for="NewPasswordConfirmation" type="password" id="passwordInput" class="sign-up__form__group-password" placeholder="Повторите пароль" />
+                <button type="button" class="sign-up__password-toggle-btn" onclick="togglePasswordVisibility()">
+                    <i id="eyeIcon" class="fa fa-eye" style="color: lightgray;"></i>
+                </button>
+                <span asp-validation-for="NewPasswordConfirmation" class="sign-up__form__group-warning"></span>
+            </div>
+
+            <button type="submit" class="sign-up__form__button">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+        </form>
+
+        <div class="sign-up__existing-account">
+            <p>Уже есть аккаунт?</p>
+            <a class="btn" asp-controller="Auth" asp-action="LogIn">Войдите!</a>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("passwordInput");
+        var eyeIcon = document.getElementById("eyeIcon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        }
+        else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        }
+    }
+
+    async function GetCities() {
+        const url = '/cities/cities.json';
+        let cities;
+
+        try {
+            const response = await fetch(url);
+            cities = await response.json();
+        } catch (error) {
+            console.error('NO JSON', error);
+        }
+
+        let citySelect = document.getElementById('citySelect');
+        for (let object of cities) {
+            let newCity = document.createElement('option');
+            newCity.textContent = object.city;
+            citySelect.append(newCity); 
+        }
+    }
+
+    GetCities();
+</script>
