@@ -5,9 +5,11 @@
 }
 @await Html.PartialAsync("_AuthLayout")
 
+
+
 <div class="login-container">
     <div class="login">
-        <h2 class="login__title">DevLink</h2>
+        <h2 class="login__title">Вход DevLink</h2>
 
         @if (!ViewData.ModelState.IsValid)
         {
@@ -20,7 +22,7 @@
         }
         else
         {
-            <p class="login__subtitile">Пожалуйста войдите в свой аккаунт</p>
+            <p class="login__subtitle">Пожалуйста, войдите в свой аккаунт</p>
         }
 
         <form action="/Auth/LogIntoAccount" method="post" class="login__form">
@@ -49,7 +51,7 @@
 
         <div class="login__new-account">
             <p>Еще нет аккаунта?</p>
-            <a class="btn" asp-controller="Auth" asp-action="LogIn">Создайте!</a>
+            <a class="btn" asp-controller="Auth" asp-action="SignUp">Создайте!</a>
         </div>
     </div>
 </div>

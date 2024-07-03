@@ -36,6 +36,15 @@ body {
     flex-direction: column;
     background: var(--maroon);
     padding: 30px;
+    border-radius: 16px;
+}
+
+.login__title {
+    text-align: center;
+}
+
+.login__subtitle {
+    text-align: center;
 }
 
 .login__form {
@@ -145,6 +154,7 @@ body {
     background: var(--yellow);
     color: var(--dark-gray);
     text-align: center;
+    border-radius: 16px;
 }
  
 .login__error p {
@@ -173,6 +183,149 @@ body {
 }
 
 
+/**********************   SignUpForm   ***************************/
+
+
+.sign-up-container {
+    background: var(--dark-gray);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--light-gray);
+}
+
+.sign-up {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    background: var(--maroon);
+    padding: 30px;
+    border-radius: 16px;
+}
+
+.sign-up__title {
+    text-align: center;
+}
+
+.sign-up__subtitle {
+    text-align: center;
+}
+
+.sign-up__form {
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.validation {
+    display: none;
+}
+
+.sign-up__form__group {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    position: relative;
+}
+
+.sign-up__form__group:nth-child(4),
+.sign-up__form__group:nth-child(9),
+.sign-up__form__group:nth-child(10) {
+    grid-column: span 2;
+}
+
+.sign-up__form__group-label {
+    margin-bottom: 4px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.sign-up__form__group input {
+    background: var(--gray);
+    border: none;
+    border-radius: 8px;
+    height: 40px;
+    padding: 10px;
+    color: var(--white);
+}
+
+.sign-up__form__group input::placeholder {
+    color: var(--light-gray);
+}
+
+.sign-up__form__group-select {
+    background: var(--gray);
+    border: none;
+    border-radius: 8px;
+    height: 40px;
+    padding: 10px;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.sign-up__form__group-warning {
+    margin-top: 5px;
+    color: var(--yellow);
+    text-align: center;
+    font-size: 12px;
+}
+
+.sign-up__form__button {
+    grid-column: span 2;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    background: var(--rose-red);
+    color: var(--light-gray);
+    cursor: pointer;
+    font-size: 20px;
+    transition: transform 0.2s, box-shadow 0.2s, border-radius 0.2s;
+}
+
+.sign-up__form__button:hover {
+    background: var(--dark-pink);
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.sign-up__error {
+    background: var(--yellow);
+    color: var(--dark-gray);
+    text-align: center;
+    border-radius: 8px;
+}
+ 
+.sign-up__error p {
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.sign-up__existing-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.sign-up__existing-account a {
+    color: var(--light-gray);
+    text-decoration: none;
+    border: 2px solid var(--dark-pink);
+    border-radius: 8px;
+    padding: 10px;
+    margin-left: 8px;
+}
+
+.sign-up__existing-account a:hover {
+    border: 2px solid var(--rose-red);
+}
+
+
 /**********************   ShowPasswordBtn   ***************************/
 
 
@@ -186,6 +339,20 @@ body {
 }
 
 .password-toggle-btn i {
+    font-size: 20px;
+    color: #000;
+}
+
+.sign-up__password-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.sign-up__password-toggle-btn i {
     font-size: 20px;
     color: #000;
 }

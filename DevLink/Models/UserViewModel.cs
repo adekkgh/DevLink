@@ -19,9 +19,12 @@ namespace DevLink.Models
         [StringLength(15, MinimumLength = 3, ErrorMessage = "Слишком короткий никнейм")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, введите свою электоронную почту")]
+        [Required(ErrorMessage = "Пожалуйста, введите электоронную почту")]
         [EmailAddress(ErrorMessage = "Пожалуйста, введите подлинную электоронную почту")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, укажите номер телефона")]
+        [Phone(ErrorMessage = "Пожалуйста, введите действительный номер телефона")]
         public string Phone { get; set; }
         public string City { get; set; }
         public string Gender { get; set; }
