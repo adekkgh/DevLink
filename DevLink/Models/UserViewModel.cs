@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DevLink.Db.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DevLink.Models
@@ -41,5 +43,8 @@ namespace DevLink.Models
         [Compare("NewPassword", ErrorMessage = "Это не совпадает с выбранным вами паролем")]
         public string NewPasswordConfirmation { get; set; }
         public string Role { get; set; }
-    }
+		//public ICollection<Friendship> Friendships { get; set; }
+		public List<FriendshipRequestViewModel> IncomingRequests { get; set; }
+		public List<FriendshipRequestViewModel> OutgoingRequests { get; set; }
+	}
 }

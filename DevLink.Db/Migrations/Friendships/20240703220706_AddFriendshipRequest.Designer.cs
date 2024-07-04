@@ -4,14 +4,16 @@ using DevLink.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DevLink.Db.Migrations
+namespace DevLink.Db.Migrations.Friendships
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240703220706_AddFriendshipRequest")]
+    partial class AddFriendshipRequest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,26 +54,20 @@ namespace DevLink.Db.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AcceptorId")
+                    b.Property<Guid?>("AcceptorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsAccept")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("SenderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserId1")
+                    b.Property<Guid?>("SenderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AcceptorId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("SenderId");
 
                     b.ToTable("FriendshipRequests");
                 });
@@ -241,22 +237,22 @@ namespace DevLink.Db.Migrations
 
             modelBuilder.Entity("DevLink.Db.Models.FriendshipRequest", b =>
                 {
-                    b.HasOne("DevLink.Db.Models.User", null)
-                        .WithMany("IncomingRequests")
-                        .HasForeignKey("UserId");
+                    b.HasOne("DevLink.Db.Models.User", "Acceptor")
+                        .WithMany()
+                        .HasForeignKey("AcceptorId");
 
-                    b.HasOne("DevLink.Db.Models.User", null)
-                        .WithMany("OutgoingRequests")
-                        .HasForeignKey("UserId1");
+                    b.HasOne("DevLink.Db.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId");
+
+                    b.Navigation("Acceptor");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("DevLink.Db.Models.User", b =>
                 {
                     b.Navigation("Friendships");
-
-                    b.Navigation("IncomingRequests");
-
-                    b.Navigation("OutgoingRequests");
                 });
 #pragma warning restore 612, 618
         }

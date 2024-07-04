@@ -14,6 +14,7 @@ namespace DevLink.Helpers
 			{
 				usersView.Add(new UserViewModel
 				{
+					Id = user.Id,
 					FirstName = user.FirstName,
 					LastName = user.LastName,
 					Email = user.Email,
@@ -23,10 +24,50 @@ namespace DevLink.Helpers
 					Phone = user.Phone,
 					Role = user.Role,
 					UserName = user.UserName,
-					Id = user.Id
+					IncomingRequests = ToFriendshipRequestsViewModel(user.IncomingRequests),
+					OutgoingRequests = ToFriendshipRequestsViewModel(user.OutgoingRequests)
 				});
 			}
 			return usersView;
+		}
+
+		public static UserViewModel ToUserViewModel(User user)
+		{
+			return new UserViewModel
+			{
+				Id = user.Id,
+				FirstName = user.FirstName,
+				LastName = user.LastName,
+				Email = user.Email,
+				City = user.City,
+				Gender = user.Gender,
+				Password = user.Password,
+				Phone = user.Phone,
+				Role = user.Role,
+				UserName = user.UserName,
+				IncomingRequests = ToFriendshipRequestsViewModel(user.IncomingRequests),
+				OutgoingRequests = ToFriendshipRequestsViewModel(user.OutgoingRequests)
+			};
+		}
+		public static List<FriendshipRequestViewModel> ToFriendshipRequestsViewModel(List<FriendshipRequest> friendshipRequest)
+		{
+			var res = new List<FriendshipRequestViewModel>();
+			foreach(var item in friendshipRequest)
+			{
+				res.Add(ToFriendshipRequestsViewModel(item));
+			}
+			return res;
+		}
+
+		public static FriendshipRequestViewModel ToFriendshipRequestsViewModel(FriendshipRequest friendshipRequest)
+		{
+			return new FriendshipRequestViewModel
+			{
+				Id = friendshipRequest.Id,
+				SenderId = friendshipRequest.SenderId,
+				AcceptorId = friendshipRequest.AcceptorId,
+				IsAccept = friendshipRequest.IsAccept
+			};
 		}
 	}
 }

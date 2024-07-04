@@ -17,5 +17,13 @@ namespace DevLink.Db.Models
         public string Password { get; set; }
         public string Role { get; set; }
         public ICollection<Friendship> Friendships { get; set; }
-    }
+        public List<FriendshipRequest> IncomingRequests { get; set; }
+		public List<FriendshipRequest> OutgoingRequests { get; set; }
+        public User() 
+        { 
+            Friendships = new List<Friendship>();
+            IncomingRequests = new List<FriendshipRequest>();
+            OutgoingRequests = new List<FriendshipRequest>();
+        }
+	}
 }
