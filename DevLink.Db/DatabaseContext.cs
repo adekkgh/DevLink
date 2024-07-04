@@ -9,6 +9,7 @@ namespace DevLink.Db
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<FriendshipRequest> FriendshipRequests { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

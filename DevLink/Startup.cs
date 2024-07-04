@@ -32,6 +32,7 @@ namespace DevLink
             services.AddControllersWithViews();
 
             services.AddTransient<IUsersRepository, UsersDbRepository>();
+            services.AddTransient<IFriendshipRequests, FriendshipRequestsDbRepository>();
             services.AddHttpContextAccessor();
         }
 

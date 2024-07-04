@@ -26,5 +26,16 @@ namespace DevLink.Controllers
 
             return View(friendsView);
         }
+        public IActionResult AddFriend(Guid id)
+        {
+			if (Request.Cookies["userGuid"] == null)
+			{
+				return RedirectToAction("LogIn", "Auth");
+			}
+			var sender = usersRepository.FindById(id);
+            var curUser = usersRepository.FindById(Guid.Parse(Request.Cookies["userGuid"]));
+            usersRepository.AddFriends(sender, curUser);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -1,0 +1,12 @@
+﻿@model List<UserViewModel>
+
+<h2>АРСЕН ТУТ НОРМАЛЬНО ДА ОФОРМИ ЕЖЖЕ</h2>
+
+<li>
+	@foreach(var user in Model)
+	{
+		<ul>@user.FirstName</ul>
+		<h4>ну и по мелочи про пользователя хз</h4>
+		<ul><a asp-controller="Friends" asp-action="AddFriend" asp-route-id="@user.Id">Принять запрос</a></ul>
+	}
+</li>

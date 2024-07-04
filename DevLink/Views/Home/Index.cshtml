@@ -18,7 +18,7 @@
                     <span> • @user.UserName</span>
                 </div>
                 <p class="home__friends__card-info">@user.City</p>
-                <a class="btn home__friends__card-button" asp-controller="Home" asp-action="Index">Добавить</a>
+                <a class="btn home__friends__card-button" asp-controller="FriendshipRequest" asp-action="Add" asp-route-id="@user.Id">Добавить</a>
             </div>
         }
     </div>
