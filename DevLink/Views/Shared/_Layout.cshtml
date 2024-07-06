@@ -34,15 +34,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="FriendshipRequest" asp-action="Sent">
-                        <img src="~/images/sidebar/friends-icon.png" alt="" width="24" height="24" class="me-2">
-                        <span class="ml-2">Смотреть отправленные заявки. Эту кнопку где по кайфу сделай Арсен</span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="FriendshipRequest" asp-action="Incoming">
                         <img src="~/images/sidebar/friends-icon.png" alt="" width="24" height="24" class="me-2">
-                        <span class="ml-2">Входящие заявки в др</span>
+                        <span class="ml-2">Заявки в друзья</span>
+                        @await Component.InvokeAsync("FriendshipRequest")
                     </a>
                 </li>
                 <li class="nav-item">
@@ -91,20 +86,25 @@
     topRounding.classList.add('nav-item-top-rounding');
     bottomRounding.classList.add('nav-item-bottom-rounding');
 
-    if (currentURL.includes('Home')) {
+    if (currentURL.includes('Home/')) {
         navBars[0].classList.add('active-nav-bar');
         navBars[0].append(topRounding);
         navBars[0].append(bottomRounding);
     }
-    else if (currentURL.includes('Chats')) {
+    else if (currentURL.includes('Chats/')) {
         navBars[1].classList.add('active-nav-bar');
         navBars[1].append(topRounding);
         navBars[1].append(bottomRounding);
     }
-    else if (currentURL.includes('Friends')) {
+    else if (currentURL.includes('Friends/')) {
         navBars[2].classList.add('active-nav-bar');
         navBars[2].append(topRounding);
         navBars[2].append(bottomRounding);
+    }
+    else if (currentURL.includes('FriendshipRequest/')) {
+        navBars[3].classList.add('active-nav-bar');
+        navBars[3].append(topRounding);
+        navBars[3].append(bottomRounding);
     }
 
 </script>

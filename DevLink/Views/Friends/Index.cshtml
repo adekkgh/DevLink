@@ -26,7 +26,7 @@
                         <p class="friends__list__card__details-email">@user.Email</p>
                         <p class="friends__list__card__details-info">@user.City</p>
                     </div>
-                    <a class="btn friends__list__card__details-button" asp-controller="Friends" asp-action="Index">Удалить</a>
+                    <a class="btn friends__list__card__details-button" asp-controller="Friends" asp-action="DeleteFriend" asp-route-friendId=@user.Id>Удалить</a>
                 </div>
             }
         </div>

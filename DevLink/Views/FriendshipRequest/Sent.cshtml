@@ -1,11 +1,23 @@
 ﻿@model List<UserViewModel>
 
-<h2>АРСЕН ТУТ НОРМАЛЬНО ДА ОФОРМИ ЕЖЖЕ</h2>
 
-<li>
-	@foreach(var user in Model)
-	{
-		<ul>@user.FirstName</ul>
-		<h4>ну и по мелочи про пользователя хз</h4>
-	}
-</li>
+
+<div class="text-center">
+	<div class="requests-sent__top">
+		<h1 class="display-3">Отправленные заявки</h1>
+		<a class="btn requests-sent__top-incoming" asp-controller="FriendshipRequest" asp-action="Incoming">Входящие заявки</a>
+	</div>
+
+	<div class="requests-sent__list">
+		@foreach(var user in Model)
+		{
+			<div class="requests-sent__list__card">
+				<img src="~/images/sidebar/profile-icon.jpg" class="requests-sent__list__card-image" />
+				<div class="requests-sent__list__card__info">
+					<h3>@user.FirstName @user.LastName</h3>
+					<p>@user.City</p>
+				</div>
+			</div>
+		}
+	</div>
+</div>

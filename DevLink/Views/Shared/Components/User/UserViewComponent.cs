@@ -24,6 +24,7 @@ namespace DevLink.Views.Shared.Components.User
             {
                 return View("User", "");
             }
+
             var user = usersRepository.FindById(Guid.Parse(id));
             return View("User", user.FirstName);
         }

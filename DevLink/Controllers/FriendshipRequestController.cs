@@ -18,6 +18,7 @@ namespace DevLink.Controllers
 			this.usersRepository = usersRepository;
 			friendshipRequestsRepository = friendshipRequests;
 		}
+
 		public IActionResult Add(Guid id)
 		{
 			if (Request.Cookies["userGuid"] == null)
@@ -33,10 +34,12 @@ namespace DevLink.Controllers
 				SenderId = sender.Id,
 				AcceptorId = acceptor.Id
 			};
+
 			if (usersRepository.CheckFriendRequest(sender, acceptor,request))
 			{
 				return RedirectToAction("Warning");
 			}
+
 			usersRepository.SendFriendRequest(sender, acceptor, request);
 			return RedirectToAction("Sent");
 		}
@@ -47,12 +50,17 @@ namespace DevLink.Controllers
 			{
 				return RedirectToAction("LogIn", "Auth");
 			}
+
 			var requests = usersRepository.FindById(Guid.Parse(Request.Cookies["userGuid"])).OutgoingRequests;
 			var res = new List<UserViewModel>();
+
 			foreach (var request in requests)
 			{
-				var user = usersRepository.FindById(request.AcceptorId); //тут сохраняем список принимающих, т.е. тех кому мы кинули
-				res.Add(Mapping.ToUserViewModel(user));
+				if(!request.IsAccept)
+				{
+					var user = usersRepository.FindById(request.AcceptorId); //тут сохраняем список принимающих, т.е. тех кому мы кинули
+					res.Add(Mapping.ToUserViewModel(user));
+				}
 			}
 
 			return View(res);
@@ -63,12 +71,17 @@ namespace DevLink.Controllers
 			{
 				return RedirectToAction("LogIn", "Auth");
 			}
+
 			var requests = usersRepository.FindById(Guid.Parse(Request.Cookies["userGuid"])).IncomingRequests;
 			var res = new List<UserViewModel>();
+
 			foreach (var request in requests)
 			{
-				var user = usersRepository.FindById(request.SenderId);	//а тут список отправителей, т.е. тех кто кинул нам
-				res.Add(Mapping.ToUserViewModel(user));
+				if(!request.IsAccept)
+				{
+					var user = usersRepository.FindById(request.SenderId);  //а тут список отправителей, т.е. тех кто кинул нам
+					res.Add(Mapping.ToUserViewModel(user));
+				}
 			}
 
 			return View(res);

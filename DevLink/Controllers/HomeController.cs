@@ -29,6 +29,8 @@ namespace DevLink.Controllers
                 return RedirectToAction("LogIn", "Auth");
             }
 
+            var georLox = _usersRepository.FindById(Guid.Parse(Request.Cookies["userGuid"])).OutgoingRequests;                  // крч я не знаю на кой черт это нужно, но без этого условие в представлении не хочет отрабатывать
+            
             var users = Mapping.ToUsersViewModel(_usersRepository.GetPossibleFriends(Guid.Parse(Request.Cookies["userGuid"])));
             return View(users);
         }

@@ -85,7 +85,7 @@ namespace DevLink.Db
             var possibleFriends = new List<User>();
             foreach(var user in databaseContext.Users)
             {
-                if (!friends.Contains(user) && user.Role != "admin")
+                if (!friends.Contains(user) && user.Role != "admin" && user.Id != id && user.IncomingRequests.Where(r => r.SenderId == id).Count() == 0)
                 {
                     possibleFriends.Add(user);
                 }
@@ -96,28 +96,42 @@ namespace DevLink.Db
 
         public void SendFriendRequest(User user,User friend, FriendshipRequest request)
         {
-            
-            
 			databaseContext.Users.Include(x => x.OutgoingRequests).FirstOrDefault(u => u.Id == user.Id).OutgoingRequests.Add(request); //ну типа у отправляющего в список добавляется айди принмающего
 			databaseContext.Users.Include(x => x.IncomingRequests).FirstOrDefault(u => u.Id == friend.Id).IncomingRequests.Add(request); //а у принимающего наоборот. EF сам это делает.
 
 			databaseContext.SaveChanges();
-
 		}
+
         public bool CheckFriendRequest(User user, User friend,FriendshipRequest request)
         {
             if (databaseContext.Users.Include(x => x.OutgoingRequests).FirstOrDefault(u => u.Id == user.Id).OutgoingRequests.FirstOrDefault(x => x.SenderId == user.Id) != null                     //это типо если такой запрос уже существует,
                 && databaseContext.Users.Include(x => x.IncomingRequests).FirstOrDefault(u => u.Id == friend.Id).IncomingRequests.FirstOrDefault(x => x.AcceptorId == friend.Id) != null) return true;  //то того кто его кидает об этом предупредят
-			return false;
-
+			
+            return false;
 		}
+
         public void AddFriends(User user1, User user2)
         {
             Friendship friendship1 = new Friendship() { User = user1, Friend = user2};
 			Friendship friendship2 = new Friendship() { User = user2, Friend = user1 };
 			databaseContext.Users.FirstOrDefault(u => user1.Id == u.Id).Friendships.Add(friendship1);
 			databaseContext.Users.FirstOrDefault(u => user2.Id == u.Id).Friendships.Add(friendship2);
+
 			databaseContext.SaveChanges();
+        }
+
+        public void DeleteFriend(User user1, User user2)
+        {
+            var friendship1 = databaseContext.Friendships.FirstOrDefault(f => f.UserId == user1.Id && f.FriendId == user2.Id);
+            var friendship2 = databaseContext.Friendships.FirstOrDefault(f => f.UserId == user2.Id && f.FriendId == user1.Id);
+            var friendshipRequest1 = databaseContext.FriendshipRequests.FirstOrDefault(r => r.SenderId == user1.Id || r.AcceptorId == user1.Id);
+            var friendshipRequest2 = databaseContext.FriendshipRequests.FirstOrDefault(r => r.SenderId == user2.Id || r.AcceptorId == user2.Id);
+            databaseContext.Friendships.Remove(friendship1);
+            databaseContext.Friendships.Remove(friendship2);
+            databaseContext.FriendshipRequests.Remove(friendshipRequest1);
+            databaseContext.FriendshipRequests.Remove(friendshipRequest2);
+
+            databaseContext.SaveChanges();
         }
 	}
 
@@ -137,5 +151,6 @@ namespace DevLink.Db
         public void SendFriendRequest(User user, User friend, FriendshipRequest request);
         public bool CheckFriendRequest(User user, User friend, FriendshipRequest request);
         public void AddFriends(User user1, User user2);
-	}
+        public void DeleteFriend(User user1, User user2);
+    }
 }

@@ -2,6 +2,8 @@
 using DevLink.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace DevLink.Controllers
 {
@@ -32,9 +34,30 @@ namespace DevLink.Controllers
 			{
 				return RedirectToAction("LogIn", "Auth");
 			}
+
 			var sender = usersRepository.FindById(id);
             var curUser = usersRepository.FindById(Guid.Parse(Request.Cookies["userGuid"]));
-            usersRepository.AddFriends(sender, curUser);
+
+			sender.OutgoingRequests.FirstOrDefault(r => r.SenderId == sender.Id).IsAccept = true;
+			curUser.IncomingRequests.FirstOrDefault(r => r.AcceptorId == curUser.Id).IsAccept = true;
+
+			usersRepository.AddFriends(sender, curUser);
+
+			return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteFriend(Guid friendId)
+        {
+            if (Request.Cookies["userGuid"] == null)
+            {
+                return RedirectToAction("LogIn", "Auth");
+            }
+
+            var user1 = usersRepository.FindById(Guid.Parse(Request.Cookies["userGuid"]));
+            var user2 = usersRepository.FindById(friendId);
+
+            usersRepository.DeleteFriend(user1, user2);
+
             return RedirectToAction("Index");
         }
     }
