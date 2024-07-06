@@ -1,12 +1,27 @@
 ﻿@model List<UserViewModel>
 
-<h2>АРСЕН ТУТ НОРМАЛЬНО ДА ОФОРМИ ЕЖЖЕ</h2>
 
-<li>
-	@foreach(var user in Model)
-	{
-		<ul>@user.FirstName</ul>
-		<h4>ну и по мелочи про пользователя хз</h4>
-		<ul><a asp-controller="Friends" asp-action="AddFriend" asp-route-id="@user.Id">Принять запрос</a></ul>
-	}
-</li>
+
+<div class="text-center">
+	<div class="incoming__top">
+		<h1 class="display-3">Входящие заявки в друзья</h1>
+		<a class="btn incoming__top-sent" asp-controller="FriendshipRequest" asp-action="Sent">Отправленные заявки</a>
+	</div>
+
+	<div class="incoming__list">
+		@foreach (var user in Model)
+		{
+			<div class="incoming__list__card">
+				<img src="~/images/sidebar/profile-icon.jpg" class="incoming__list__card-image" />
+				<div class="incoming__list__card__info">
+					<h3>@user.FirstName @user.LastName</h3>
+					<p>@user.City</p>
+				</div>
+				<div class="incoming__list__card_buttons">
+					<a class="btn incoming__list__card-decline" asp-controller="FriendshipRequest" asp-action="Sent">Отклонить</a>
+					<a class="btn incoming__list__card-add" asp-controller="Friends" asp-action="AddFriend" asp-route-id="@user.Id">Принять</a>
+				</div>
+			</div>
+		}
+	</div>
+</div>

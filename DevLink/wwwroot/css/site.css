@@ -86,6 +86,7 @@ body {
     --rose-red: #c3073f;
     --white: #ffffff;
     --yellow: yellow;
+    --green: #029d15;
 }
 
 .main-container {
@@ -312,5 +313,135 @@ body {
 
 .friends__list__card__details-button:hover {
     background: var(--gray);
+    color: var(--white);
+}
+
+
+/***********************   SentRequestsPage   *************************/
+
+
+.requests-sent__top {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.requests-sent__top-incoming {
+    position: absolute;
+    right: 0;
+    margin-left: auto;
+    color: var(--white);
+    background: var(--maroon);
+    transition: transform 0.4s, box-shadow 0.2s, border-radius 0.2s;
+}
+
+.requests-sent__top-incoming:hover {
+    transform: scale(1.1) translateY(-5px);
+    color: var(--dark-gray);
+    background: var(--white);
+}
+
+.requests-sent__list {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto 0;
+}
+
+.requests-sent__list__card {
+    display: flex;
+    background: var(--maroon);
+    padding: 10px;
+}
+
+.requests-sent__list__card-image {
+    width: 200px;
+}
+
+.requests-sent__list__card__info {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.requests-sent__list__card__info p {
+    opacity: 0.7;
+}
+
+
+/***********************   IncomingRequestsPage   *************************/
+
+
+.incoming__top {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.incoming__top-sent {
+    position: absolute;
+    right: 0;
+    margin-left: auto;
+    color: var(--white);
+    background: var(--maroon);
+    transition: transform 0.4s, box-shadow 0.2s, border-radius 0.2s;
+}
+
+.incoming__top-sent:hover {
+    transform: scale(1.1) translateY(-5px);
+    color: var(--dark-gray);
+    background: var(--white);
+}
+
+.incoming__list {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto 0;
+}
+
+.incoming__list__card {
+    display: flex;
+    background: var(--maroon);
+    padding: 10px;
+}
+
+.incoming__list__card-image {
+    width: 200px;
+}
+
+.incoming__list__card__info {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.incoming__list__card__info p {
+    opacity: 0.7;
+}
+
+.incoming__list__card_buttons {
+    align-self: end;
+    margin: 0 10px 10px auto;
+}
+
+.incoming__list__card-decline {
+    background: var(--white);
+}
+
+.incoming__list__card-decline:hover {
+    background: var(--rose-red);
+    color: var(--white);
+}
+
+.incoming__list__card-add {
+    margin-left: 20px;
+    background: var(--white);
+}
+
+.incoming__list__card-add:hover {
+    background: var(--green);
     color: var(--white);
 }

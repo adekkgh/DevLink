@@ -1,4 +1,10 @@
 ﻿@model List<UserViewModel>
+@using Microsoft.AspNetCore.Http
+
+@{
+    var currernUser = Context.Request.Cookies["userGuid"];
+}
+
 
 
 
@@ -18,7 +24,14 @@
                     <span> • @user.UserName</span>
                 </div>
                 <p class="home__friends__card-info">@user.City</p>
-                <a class="btn home__friends__card-button" asp-controller="FriendshipRequest" asp-action="Add" asp-route-id="@user.Id">Добавить</a>
+                @if (user.OutgoingRequests.Where(f => f.AcceptorId.ToString() == currernUser && !f.IsAccept).Count() != 0)
+                {
+                    <a class="btn home__friends__card-button" asp-controller="FriendshipRequest" asp-action="Incoming">Ответить на заявку</a>
+                }
+                else
+                {
+                    <a class="btn home__friends__card-button" asp-controller="FriendshipRequest" asp-action="Add" asp-route-id="@user.Id">Добавить</a>
+                }
             </div>
         }
     </div>
