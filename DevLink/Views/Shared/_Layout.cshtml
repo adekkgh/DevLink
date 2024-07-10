@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Chat" asp-action="Index">
                         <img src="~/images/sidebar/chats-icon.png" alt="" width="24" height="24" class="me-2">
                         <span class="ml-2">Сообщения</span>
                     </a>
@@ -91,7 +91,7 @@
         navBars[0].append(topRounding);
         navBars[0].append(bottomRounding);
     }
-    else if (currentURL.includes('Chats/')) {
+    else if (currentURL.includes('Chat/')) {
         navBars[1].classList.add('active-nav-bar');
         navBars[1].append(topRounding);
         navBars[1].append(bottomRounding);
