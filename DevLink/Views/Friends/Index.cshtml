@@ -20,7 +20,7 @@
                     </div>
                     <div class="friends__list__card__details">
                         <div class="friends__list__card__details-name">
-                            <h4>@user.FirstName @user.LastName</h4>
+                            <a asp-controller="Home" asp-action="Profile" asp-route-id=@user.Id>@user.FirstName @user.LastName</a>
                             <span> •   @user.UserName</span>
                         </div>
                         <p class="friends__list__card__details-email">@user.Email</p>

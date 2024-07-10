@@ -199,11 +199,18 @@ body {
 
 .home__friends__card-name {
     display: flex;
-    align-items: end;
+    align-items: center;
 }
 
-.home__friends__card-name h6 {
+.home__friends__card-name a {
+    color: unset;
+    text-decoration: none;
+    cursor: pointer;
     margin: 0;
+}
+
+.home__friends__card-name a:hover {
+    opacity: 0.6;
 }
 
 .home__friends__card-name span {
@@ -283,8 +290,15 @@ body {
     align-items: center;
 }
 
-.friends__list__card__details-name h4 {
+.friends__list__card__details-name a {
+    cursor: pointer;
+    font-size: 18px;
+    color: unset;
     margin: 0;
+}
+
+.friends__list__card__details-name a:hover {
+    opacity: 0.6;
 }
 
 .friends__list__card__details-name span {
@@ -347,6 +361,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 50px auto 0;
+    gap: 10px;
 }
 
 .requests-sent__list__card {
@@ -364,6 +379,18 @@ body {
     flex-direction: column;
     padding: 20px;
 }
+
+.requests-sent__list__card__info a {
+    color: unset;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.requests-sent__list__card__info a:hover {
+    opacity: 0.7;
+}
+
 
 .requests-sent__list__card__info p {
     opacity: 0.7;
@@ -400,6 +427,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 50px auto 0;
+    gap: 10px;
 }
 
 .incoming__list__card {
@@ -416,6 +444,17 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
+}
+
+.incoming__list__card__info a {
+    color: unset;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.incoming__list__card__info a:hover {
+    opacity: 0.7;
 }
 
 .incoming__list__card__info p {
