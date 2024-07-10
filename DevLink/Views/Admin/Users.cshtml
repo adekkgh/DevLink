@@ -1,0 +1,24 @@
+﻿@model List<UserViewModel>
+<h2>Список зарегестрированных пользователей</h2>
+<table class="table text-white">
+	<tr>
+		<th>Имя</th>
+		<th>Фамилия</th>
+		<th>Никнейм</th>
+		<th>Город</th>
+		<th>Пол</th>
+		<th>Роль</th>
+	</tr>
+		@foreach(var user in Model)
+		{
+			<tr>
+				<td>@user.FirstName</td>
+				<td>@user.LastName</td>
+				<td>@user.UserName</td>
+				<td>@user.City</td>
+				<td>@user.Gender</td>
+				<td>@user.Role</td>
+			</tr>
+		}
+</table>
+

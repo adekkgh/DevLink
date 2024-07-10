@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevLink", "DevLink\DevLink.csproj", "{97EC0F65-9EF4-40F3-821E-91159B9B7BB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevLink.Db", "DevLink.Db\DevLink.Db.csproj", "{96811AE4-8C10-449E-8962-FFD673EC5037}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevLink.Db", "DevLink.Db\DevLink.Db.csproj", "{96811AE4-8C10-449E-8962-FFD673EC5037}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

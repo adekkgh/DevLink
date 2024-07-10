@@ -46,12 +46,25 @@
                         <span class="ml-2">Правила пользования</span>
                     </a>
                 </li>
+                 @{
+                    var currernUser = Context.Request.Cookies["role"];
+                    if(currernUser == "admin")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Admin" asp-action="Users">
+                                <img src="~/images/sidebar/friends-icon.png" alt="" width="24" height="24" class="me-2">
+                                <span class="ml-2">Пользователи</span>
+                            </a>
+                        </li>
+                    }
+                   
+                }
                 <li class="nav-item">
                     <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Auth" asp-action="LogOut">
                         <img src="~/images/sidebar/logout-icon.png" alt="" width="24" height="24" class="me-2">
                         <span class="ml-2">Выход</span>
                     </a>
-                </li>
+                </li>   
             </ul>
             <hr>
             <div class="dropdown p-3">
