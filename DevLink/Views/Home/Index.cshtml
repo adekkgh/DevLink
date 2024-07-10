@@ -20,7 +20,7 @@
                     <img src="~/images/sidebar/profile-icon.jpg" class="home__friends__card-image" />
                 </div>
                 <div class="home__friends__card-name">
-                    <h6>@user.FirstName @user.LastName</h6>
+                    <a asp-controller="Home" asp-action="Profile" asp-route-id=@user.Id>@user.FirstName @user.LastName</a>
                     <span> • @user.UserName</span>
                 </div>
                 <p class="home__friends__card-info">@user.City</p>

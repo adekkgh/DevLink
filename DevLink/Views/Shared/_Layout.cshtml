@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentUserRole = Context.Request.Cookies["role"];
+    var currentUserId = Context.Request.Cookies["userGuid"];
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -47,17 +53,15 @@
                     </a>
                 </li>
                  @{
-                    var currernUser = Context.Request.Cookies["role"];
-                    if(currernUser == "admin")
+                    if(currentUserRole == "admin")
                     {
-                        <li class="nav-item">
-                            <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Admin" asp-action="Users">
-                                <img src="~/images/sidebar/friends-icon.png" alt="" width="24" height="24" class="me-2">
-                                <span class="ml-2">Пользователи</span>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Admin" asp-action="Users">
+                                    <img src="~/images/sidebar/friends-icon.png" alt="" width="24" height="24" class="me-2">
+                                    <span class="ml-2">Пользователи</span>
+                                </a>
+                            </li>
                     }
-                   
                 }
                 <li class="nav-item">
                     <a class="nav-link text-white d-flex align-items-center" asp-area="" asp-controller="Auth" asp-action="LogOut">
@@ -68,7 +72,7 @@
             </ul>
             <hr>
             <div class="dropdown p-3">
-                <a class="d-flex align-items-center text-white text-decoration-none" asp-area="" asp-controller="Home" asp-action="UserPage" aria-expanded="false">
+                <a class="d-flex align-items-center text-white text-decoration-none" asp-area="" asp-controller="Home" asp-action="Profile" asp-route-id=@Guid.Parse(currentUserId) aria-expanded="false">
                     <img src="~/images/sidebar/profile-icon.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
                     @await Component.InvokeAsync("User")
                 </a>
@@ -98,8 +102,11 @@
 
     topRounding.classList.add('nav-item-top-rounding');
     bottomRounding.classList.add('nav-item-bottom-rounding');
-
-    if (currentURL.includes('Home/')) {
+    
+    if (currentURL.includes('/Profile')) {
+        navBars[0].classList.remove('active-nav-bar');
+    }
+    else if (currentURL.includes('Home/')) {
         navBars[0].classList.add('active-nav-bar');
         navBars[0].append(topRounding);
         navBars[0].append(bottomRounding);
@@ -118,6 +125,11 @@
         navBars[3].classList.add('active-nav-bar');
         navBars[3].append(topRounding);
         navBars[3].append(bottomRounding);
+    }
+    else if (currentURL.includes('Users/')) {
+        navBars[5].classList.add('active-nav-bar');
+        navBars[5].append(topRounding);
+        navBars[5].append(bottomRounding);
     }
 
 </script>

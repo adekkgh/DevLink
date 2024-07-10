@@ -14,7 +14,7 @@
 			<div class="incoming__list__card">
 				<img src="~/images/sidebar/profile-icon.jpg" class="incoming__list__card-image" />
 				<div class="incoming__list__card__info">
-					<h3>@user.FirstName @user.LastName</h3>
+					<a asp-controller="Home" asp-action="Profile" asp-route-id=@user.Id>@user.FirstName @user.LastName</a>
 					<p>@user.City</p>
 				</div>
 				<div class="incoming__list__card_buttons">
