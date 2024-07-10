@@ -1,0 +1,113 @@
+﻿@*@model UserViewModel
+@using Microsoft.AspNetCore.Http
+
+@{
+	var currentUser = Context.Request.Cookies["userGuid"];
+}*@
+
+
+@*<div class="text-center">
+	<h1 class="display-4">@Model.UserName</h1>
+
+</div>*@
+
+
+@model UserViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: #212529; 
+        }
+
+        .card {
+            margin-top: 20px;
+            background-color: #212529;
+        }
+
+        .card-header {
+            background-color: #212529; 
+            color: #6c757d; 
+        }
+
+        .card-body {
+            color: #f8f9fa; 
+        }
+
+        h5 {
+            color: #f8f9fa;
+        }
+
+        .info-box {
+            background-color: #6f2232; 
+            border: 1px solid #6f2232; 
+            border-radius: 8px; 
+            padding: 10px; 
+            margin-bottom: 10px; 
+        }
+
+            .info-box p {
+                color: #fff; 
+                margin-bottom: 5px; 
+            }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h3>User Profile</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <p><strong>Имя:</strong> @Model.FirstName</p>
+                        </div>
+                        <div class="info-box">
+                            <p><strong>Фамилия:</strong> @Model.LastName</p>
+                        </div>
+                        <div class="info-box">
+                            <p><strong>Никнейм:</strong> @Model.UserName</p>
+                        </div>
+                        <div class="info-box">
+                            <p><strong>Email:</strong> @Model.Email</p>
+                        </div>
+                        <div class="info-box">
+                            <p><strong>Телефон:</strong> @Model.Phone</p>
+                        </div>
+                        <div class="info-box">
+                            <p><strong>Город:</strong> @Model.City</p>
+                        </div>
+                        <div class="info-box">
+                            <p><strong>Пол:</strong> @Model.Gender</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <p><strong>Роль:</strong> @Model.Role</p>
+                        </div>
+                        <div class="info-box">
+                            <p><strong>Входящие запросы]:</strong> @Model.IncomingRequests.Count</p>
+                        </div>
+                        <div class="info-box">
+                            <p><strong>Исходящие запросы:</strong> @Model.OutgoingRequests.Count</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
