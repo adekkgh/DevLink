@@ -45,6 +45,17 @@ namespace DevLink.Controllers
             return View();
         }
 
+        
+        public IActionResult UserPage()
+        {
+            //var userInformation = _usersRepository.FindById(Guid.Parse(Request.Cookies["userGuid"]));
+
+            var userInformation = Mapping.ToUserViewModel(_usersRepository.FindById(Guid.Parse(Request.Cookies["userGuid"])));
+
+
+            return View(userInformation);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
